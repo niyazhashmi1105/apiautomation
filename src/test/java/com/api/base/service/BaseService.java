@@ -1,6 +1,5 @@
-package com.api.base;
+package com.api.base.service;
 
-import com.api.models.request.AuthRequest;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -12,11 +11,16 @@ public class BaseService {
 
     private final RequestSpecification requestSpecification;
 
-    public BaseService(){
+    public BaseService() {
         requestSpecification = given().baseUri(BASE_URL);
     }
 
-    protected Response postRequest(AuthRequest payload, String endpoint){
-            return requestSpecification.contentType(ContentType.JSON).body(payload).post(endpoint);
+    protected Response postRequest(Object payload, String endpoint) {
+        return requestSpecification.contentType(ContentType.JSON).body(payload).post(endpoint);
     }
+
+    protected Response getRequest(String endpoint) {
+        return requestSpecification.contentType(ContentType.JSON).get(endpoint);
+    }
+
 }
