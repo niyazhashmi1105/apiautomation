@@ -7,12 +7,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @ToString
 public class CreateBookingRequest {
-
-
 
     private String firstname;
     private String lastname;
@@ -20,5 +17,49 @@ public class CreateBookingRequest {
     private boolean depositpaid;
     private BookingDatesRequest bookingdates;
     private String additionalneeds;
+
+    public static class CreateBookingRequestBuilder{
+
+        private String firstname;
+        private String lastname;
+        private int totalprice;
+        private boolean depositpaid;
+        public BookingDatesRequest bookingdates;
+        private String additionalneeds;
+
+        public CreateBookingRequestBuilder setFirstname(String firstname){
+            this.firstname = firstname;
+            return this;
+        }
+
+        public CreateBookingRequestBuilder setLastname(String lastname){
+            this.lastname = lastname;
+            return this;
+        }
+
+        public CreateBookingRequestBuilder setTotalPrice(int totalprice){
+            this.totalprice = totalprice;
+            return this;
+        }
+
+        public CreateBookingRequestBuilder setDepositPaid(boolean depositpaid){
+            this.depositpaid = depositpaid;
+            return this;
+        }
+
+        public CreateBookingRequestBuilder setBookingDates(String checkin, String checkout) {
+            this.bookingdates = new BookingDatesRequest(checkin, checkout);
+            return this;
+        }
+
+        public CreateBookingRequestBuilder setAdditionalNeeds(String additionalneeds){
+            this.additionalneeds = additionalneeds;
+            return this;
+        }
+
+        public CreateBookingRequest build(){
+            return new CreateBookingRequest(firstname,lastname,totalprice,depositpaid,bookingdates,additionalneeds);
+        }
+    }
 
 }

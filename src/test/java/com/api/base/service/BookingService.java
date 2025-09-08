@@ -1,5 +1,6 @@
 package com.api.base.service;
 
+import com.api.models.request.CreateBookingRequest;
 import io.restassured.response.Response;
 
 public class BookingService extends BaseService {
@@ -8,5 +9,9 @@ public class BookingService extends BaseService {
 
     public Response getAllBookingIds(){
         return getRequest(BASE_PATH);
+    }
+
+    public Response createBooking(CreateBookingRequest payload){
+        return postRequest(payload,BASE_PATH);
     }
 }
