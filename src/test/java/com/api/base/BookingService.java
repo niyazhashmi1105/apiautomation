@@ -1,4 +1,4 @@
-package com.api.base.service;
+package com.api.base;
 
 import com.api.models.request.CreateBookingRequest;
 import io.restassured.response.Response;

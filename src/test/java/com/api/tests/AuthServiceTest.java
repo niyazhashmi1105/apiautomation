@@ -1,6 +1,6 @@
 package com.api.tests;
 
-import com.api.base.service.AuthService;
+import com.api.base.AuthService;
 import com.api.models.request.AuthRequest;
 import com.api.models.response.AuthResponse;
 import io.restassured.response.Response;
