@@ -16,3 +16,21 @@ X-Powered-By=Express
 20:09:54.490 [main] INFO  com.api.filters.LoggingFilter - Response Body: {
     "token": "e2868f3d389b09e"
 }
+20:17:47.646 [main] INFO  com.api.filters.LoggingFilter - BASE URI: https://restful-booker.herokuapp.com
+20:17:47.647 [main] INFO  com.api.filters.LoggingFilter - Headers: Accept=*/*
+Content-Type=application/json
+20:17:47.647 [main] INFO  com.api.filters.LoggingFilter - Request Payload: {"username":"admin","password":"password123"}
+20:17:49.807 [main] INFO  com.api.filters.LoggingFilter - Status Code: 200
+20:17:49.808 [main] INFO  com.api.filters.LoggingFilter - Response Headers: Content-Length=27
+Content-Type=application/json; charset=utf-8
+Date=Mon, 27 Apr 2026 14:47:49 GMT
+Etag=W/"1b-rI1tSYSx+U8wLpWtVsuoudSOqKI"
+Nel={"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}
+Report-To={"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=lKbBlB3bWED6cvlVsaCq1DFoc7Oa6EoHiDCRVEiIj34%3D\u0026sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add\u0026ts=1777301269"}],"max_age":3600}
+Reporting-Endpoints=heroku-nel="https://nel.heroku.com/reports?s=lKbBlB3bWED6cvlVsaCq1DFoc7Oa6EoHiDCRVEiIj34%3D&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&ts=1777301269"
+Server=Heroku
+Via=1.1 heroku-router
+X-Powered-By=Express
+20:17:49.825 [main] INFO  com.api.filters.LoggingFilter - Response Body: {
+    "token": "bfce129a20c1b67"
+}
