@@ -39,6 +39,8 @@ jobs:
       if: always()
       uses: mikepenz/action-junit-report@v4
       with:
-        name: TestNG Results
-        path: target/surefire-reports/junitreports/TEST-*.xml
-        reporter: java-junit
+        report_paths: target/surefire-reports/junitreports/TEST-*.xml
+        check_name: TestNG Results
+        detailed_summary: true
+        include_passed: true
+        fail_on_failure: true
