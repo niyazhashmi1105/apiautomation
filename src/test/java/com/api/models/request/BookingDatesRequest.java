@@ -11,6 +11,7 @@ public class BookingDatesRequest {
     private String checkin;
     private String checkout;
 
+    public BookingDatesRequest(){}
     public BookingDatesRequest(String checkin,String checkout){
         this.checkin = checkin;
         this.checkout = checkout;
