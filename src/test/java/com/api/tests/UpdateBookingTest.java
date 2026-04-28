@@ -12,19 +12,21 @@ public class UpdateBookingTest extends TestBase{
     @Test(description = "Update Booking by passing Booking Id to the endpoint")
     public void updateBooking(){
 
+        String fakerFirstName = faker.name().firstName();
+        String fakerLastName = faker.name().lastName();
         UpdateBookingService updateBookingService = new UpdateBookingService();
         CreateBookingRequest updateBookingRequest = new CreateBookingRequest.CreateBookingRequestBuilder()
-                .setFirstname("James")
-                .setLastname("Brown")
-                .setTotalPrice(1000)
+                .setFirstname(fakerFirstName)
+                .setLastname(fakerLastName)
+                .setTotalPrice(price)
                 .setDepositPaid(true)
                 .setBookingDates("2026-04-28","2026-04-29")
                 .setAdditionalNeeds("breakfast").build();
         Response putResponse = updateBookingService.updateBooking(updateBookingRequest,bookingId,token);
         String firstName = putResponse.jsonPath().get("firstname");
         String lastName = putResponse.jsonPath().get("lastname");
-        Assert.assertEquals(firstName,"James");
-        Assert.assertEquals(lastName,"Brown");
+        Assert.assertEquals(firstName,fakerFirstName);
+        Assert.assertEquals(lastName,fakerLastName);
         Assert.assertEquals(putResponse.getStatusCode(),200);
 
     }

@@ -4,7 +4,7 @@
         <listener
                 class-name="com.api.listeners.TestListener"/>
     </listeners>
-    <test name="API Tests">
+    <test name="API Tests" parallel="tests" thread-count="5">
         <classes>
             <class name="com.api.tests.GetBookingIdTest"/>
             <class name="com.api.tests.GetAllBookingIdsTest"/>

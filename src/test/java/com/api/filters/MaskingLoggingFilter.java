@@ -2,6 +2,8 @@ package com.api.filters;
 
 import com.api.base.BaseService;
 import com.aventstack.extentreports.Status;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
 import io.restassured.response.Response;
@@ -18,6 +20,7 @@ public class MaskingLoggingFilter implements Filter {
 
     private static final Logger logger = LogManager.getLogger(MaskingLoggingFilter.class);
     private static final Set<String> SENSITIVE_FIELDS = Set.of("password", "token", "authorization");
+    private static final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
@@ -53,10 +56,11 @@ public class MaskingLoggingFilter implements Filter {
 
         // Mask Body
         if (filterableRequestSpecification.getBody() != null) {
-            String body = filterableRequestSpecification.getBody().toString();
-            body = maskBody(body);
-            logger.info("Request Body: " + body);
-            BaseService.extentLog(Status.INFO,"Request Payload: "+ body);
+            String rawBody = filterableRequestSpecification.getBody();
+            String maskedBody = maskBody(rawBody);
+            String prettyBody = prettyPrint(maskedBody);
+            logger.info("Request Body:\n" + prettyBody);
+            BaseService.extentLog(Status.INFO, "<pre>" + prettyBody + "</pre>");
         }
     }
 
@@ -64,9 +68,12 @@ public class MaskingLoggingFilter implements Filter {
         logger.info("===== RESPONSE =====");
         logger.info("Status: " + response.getStatusCode());
         BaseService.extentLog(Status.INFO,"Status: " +response.getStatusCode());
-        String body = maskBody(response.getBody().asString());
-        logger.info("Response Body: " + body);
-        BaseService.extentLog(Status.INFO,"Response Body: " +body);
+
+        String rawBody = response.getBody().asString();
+        String maskedBody = maskBody(rawBody);
+        String prettyBody = prettyPrint(maskedBody);
+        logger.info("Response Body:\n" + prettyBody);
+        BaseService.extentLog(Status.INFO, "<pre>" + prettyBody + "</pre>");
     }
 
     private boolean isSensitive(String key) {
@@ -86,5 +93,14 @@ public class MaskingLoggingFilter implements Filter {
     private String maskCookie(String cookieValue) {
         if (cookieValue == null) return null;
         return cookieValue.replaceAll("(token=)([^;]+)", "$1****");
+    }
+
+    private String prettyPrint(String json) {
+        try {
+            Object jsonObj = mapper.readValue(json, Object.class);
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObj);
+        } catch (Exception e) {
+            return json;
+        }
     }
 }
