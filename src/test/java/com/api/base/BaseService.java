@@ -1,6 +1,7 @@
 package com.api.base;
 
 import com.api.filters.LoggingFilter;
+import com.api.filters.MaskingLoggingFilter;
 import com.api.listeners.ExtentReportListener;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -22,7 +23,7 @@ public class BaseService {
 
 
     static{
-        RestAssured.filters(new LoggingFilter());
+        RestAssured.filters(new MaskingLoggingFilter());
     }
 
     public BaseService() {
