@@ -1,10 +1,5 @@
 package com.api.models.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
-
 
 public class BookingDatesRequest {
 

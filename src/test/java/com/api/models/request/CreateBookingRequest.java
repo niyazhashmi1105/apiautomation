@@ -1,9 +1,5 @@
 package com.api.models.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-
-
 public class CreateBookingRequest {
 
     private String firstname;
