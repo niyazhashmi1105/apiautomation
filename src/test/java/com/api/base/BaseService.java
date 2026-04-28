@@ -23,12 +23,10 @@ public class BaseService {
 
     static{
         RestAssured.filters(new LoggingFilter());
-        //ExtentReportListener.getTest().log(Status.INFO,"Request Specification " + BASE_URL);
     }
 
     public BaseService() {
         requestSpecification = given().baseUri(BASE_URL);
-
     }
 
     protected Response postRequest(Object payload, String endpoint) {
@@ -39,7 +37,19 @@ public class BaseService {
         return requestSpecification.contentType(ContentType.JSON).get(endpoint);
     }
 
-    public void extentLog(Status status, String message) {
+    protected Response putRequest(Object payload,String endpoint,String token) {
+        return requestSpecification.contentType(ContentType.JSON).header("Cookie", "token="+token).body(payload).put(endpoint);
+    }
+
+    protected Response patchRequest(Object payload,String endpoint,String token) {
+        return requestSpecification.contentType(ContentType.JSON).header("Cookie", "token="+token).body(payload).patch(endpoint);
+    }
+
+    protected Response deleteRequest(String endpoint,String token) {
+        return requestSpecification.contentType(ContentType.JSON).header("Cookie", "token="+token).delete(endpoint);
+    }
+
+    public static void extentLog(Status status, String message) {
         logger.info(message);
 
         ExtentTest test = ExtentReportListener.getTest();

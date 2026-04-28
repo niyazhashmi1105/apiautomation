@@ -1,0 +1,31 @@
+package com.api.tests;
+
+import com.api.base.UpdateBookingService;
+import com.api.models.request.CreateBookingRequest;
+import io.restassured.response.Response;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+
+public class UpdateBookingTest extends TestBase{
+
+    @Test(description = "Update Booking by passing Booking Id to the endpoint")
+    public void updateBooking(){
+
+        UpdateBookingService updateBookingService = new UpdateBookingService();
+        CreateBookingRequest updateBookingRequest = new CreateBookingRequest.CreateBookingRequestBuilder()
+                .setFirstname("James")
+                .setLastname("Brown")
+                .setTotalPrice(1000)
+                .setDepositPaid(true)
+                .setBookingDates("2026-04-28","2026-04-29")
+                .setAdditionalNeeds("breakfast").build();
+        Response putResponse = updateBookingService.updateBooking(updateBookingRequest,bookingId,token);
+        String firstName = putResponse.jsonPath().get("firstname");
+        String lastName = putResponse.jsonPath().get("lastname");
+        Assert.assertEquals(firstName,"James");
+        Assert.assertEquals(lastName,"Brown");
+        Assert.assertEquals(putResponse.getStatusCode(),200);
+
+    }
+}

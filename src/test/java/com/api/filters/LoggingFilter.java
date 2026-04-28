@@ -15,7 +15,6 @@ public class LoggingFilter implements Filter {
 
 
     private static final Logger logger = LogManager.getLogger(LoggingFilter.class);
-    BaseService baseService = new BaseService();
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification,
                            FilterableResponseSpecification filterableResponseSpecification,
@@ -30,10 +29,10 @@ public class LoggingFilter implements Filter {
         logger.info("BASE URI: {}", filterableRequestSpecification.getBaseUri());
         logger.info("Headers: {}", filterableRequestSpecification.getHeaders());
         logger.info("Request Payload: "+ filterableRequestSpecification.getBody());
-        baseService.extentLog(Status.INFO,"BASE URI: "+filterableRequestSpecification.getBaseUri());
-        baseService.extentLog(Status.INFO,"Request Method: "+ filterableRequestSpecification.getMethod());
-        baseService.extentLog(Status.INFO,"Request Headers: "+filterableRequestSpecification.getHeaders().toString());
-        baseService.extentLog(Status.INFO,"Request Payload: "+ filterableRequestSpecification.getBody());
+        BaseService.extentLog(Status.INFO,"BASE URI: "+filterableRequestSpecification.getBaseUri());
+        BaseService.extentLog(Status.INFO,"Request Method: "+ filterableRequestSpecification.getMethod());
+        BaseService.extentLog(Status.INFO,"Request Headers: "+filterableRequestSpecification.getHeaders().toString());
+        BaseService.extentLog(Status.INFO,"Request Payload: "+ filterableRequestSpecification.getBody());
 
     }
 
@@ -43,8 +42,8 @@ public class LoggingFilter implements Filter {
         logger.info("Response Headers: {}", response.getHeaders());
         logger.info("Response Body: {}", response.getBody().asPrettyString());
 
-        baseService.extentLog(Status.INFO,"Status Code: "+response.getStatusCode());
-        baseService.extentLog(Status.INFO,"Response Headers: " + response.getHeaders().toString());
-        baseService.extentLog(Status.INFO,"Response Body: " + response.getBody().asPrettyString());
+        BaseService.extentLog(Status.INFO,"Status Code: "+response.getStatusCode());
+        BaseService.extentLog(Status.INFO,"Response Headers: " + response.getHeaders().toString());
+        BaseService.extentLog(Status.INFO,"Response Body: " + response.getBody().asPrettyString());
     }
 }
