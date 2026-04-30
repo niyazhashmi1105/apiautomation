@@ -3,7 +3,7 @@ package com.api.base;
 import com.api.models.request.CreateBookingRequest;
 import io.restassured.response.Response;
 
-public class BookingService extends BaseService {
+public class CreateBookingService extends BaseService {
 
     private static final String BASE_PATH = "/booking";
 

@@ -14,7 +14,6 @@ public class AuthServiceTest {
 
         AuthService authService = new AuthService();
         Response response = authService.createToken(new AuthRequest("admin","password123"));
-        //System.out.println(response.asPrettyString());
         AuthResponse authResponse = response.as(AuthResponse.class);
         Assert.assertNotNull(authResponse);
         Assert.assertEquals(response.getStatusCode(),200);

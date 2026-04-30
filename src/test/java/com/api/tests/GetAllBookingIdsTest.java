@@ -1,6 +1,6 @@
 package com.api.tests;
 
-import com.api.base.BookingService;
+import com.api.base.CreateBookingService;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -12,10 +12,8 @@ public class GetAllBookingIdsTest {
     @Test
     public void getAllBookingIdsTest(){
 
-        BookingService bookingService = new BookingService();
+        CreateBookingService bookingService = new CreateBookingService();
         Response response  = bookingService.getAllBookingIds();
-        //System.out.println(response.prettyPrint());
-        //System.out.println(response.getStatusLine());
         Assert.assertEquals(response.getStatusLine(),"HTTP/1.1 200 OK");
 
         List<Integer> bookingIds = response.jsonPath().getList("bookingid");

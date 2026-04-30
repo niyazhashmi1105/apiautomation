@@ -10,13 +10,19 @@ public class CreateBookingRequest {
     private String additionalneeds;
 
     public CreateBookingRequest(){}
-    public CreateBookingRequest(String firstname, String lastname, int totalprice, boolean depositpaid, BookingDatesRequest bookingdates, String additionalneeds) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.totalprice = totalprice;
-        this.depositpaid = depositpaid;
-        this.bookingdates = bookingdates;
-        this.additionalneeds = additionalneeds;
+    public CreateBookingRequest(String firstname,
+                                String lastname,
+                                int totalprice,
+                                boolean depositpaid,
+                                BookingDatesRequest bookingdates,
+                                String additionalneeds) {
+
+                    this.firstname = firstname;
+                    this.lastname = lastname;
+                    this.totalprice = totalprice;
+                    this.depositpaid = depositpaid;
+                    this.bookingdates = bookingdates;
+                    this.additionalneeds = additionalneeds;
     }
 
     public String getFirstname() {

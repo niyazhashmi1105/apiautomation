@@ -5,6 +5,8 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static com.api.tests.CreateBookingTest.bookingId;
+
 
 public class DeleteBookingTest extends TestBase{
 
