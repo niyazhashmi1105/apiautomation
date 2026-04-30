@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import java.util.Optional;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 
 public class CreateBookingTest extends TestBase{
 
@@ -53,5 +55,23 @@ public class CreateBookingTest extends TestBase{
         Assert.assertTrue(bookingId>0);
         Assert.assertEquals(firstName,fname);
         Assert.assertEquals(lastName,lname);
+    }
+
+
+    @Test(description="Verify Schema validation of Create Booking Request")
+    public void verifySchemaValidatorForCreateBookingResponse(){
+
+        CreateBookingRequest createBookingRequest = new CreateBookingRequest.CreateBookingRequestBuilder()
+                .setFirstname(fname)
+                .setLastname(lname)
+                .setTotalPrice(price)
+                .setDepositPaid(true)
+                .setBookingDates("2026-04-30","2026-05-11")
+                .setAdditionalNeeds("breakfast").build();
+
+        CreateBookingService bookingService = new CreateBookingService();
+        Response response = bookingService.createBooking(createBookingRequest);
+        Assert.assertEquals(response.getStatusCode(),200);
+        response.then().assertThat().body(matchesJsonSchemaInClasspath("booking-schema.json"));
     }
 }
