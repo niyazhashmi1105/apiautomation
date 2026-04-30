@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class CreateBookingTest extends TestBase{
 
-    static int bookingId;
+    public static int bookingId;
     static String fname = getFirstName();
     static String lname = getLastName();
     static int price = getPrice();
@@ -20,10 +20,7 @@ public class CreateBookingTest extends TestBase{
     @Test(description="Create Booking API", enabled = false)
     public void createBooking(){
 
-        System.out.println("Firstname: " + fname);
-        System.out.println("Lastname: " + lname);
-        System.out.println("Price: " + price);
-        BookingDatesRequest bookingDatesRequest = new BookingDatesRequest("2025-09-07","2025-09-16");
+        BookingDatesRequest bookingDatesRequest = new BookingDatesRequest("2026-04-30","2026-05-11");
         CreateBookingRequest createBookingRequest = new CreateBookingRequest(fname,lname, price,true,bookingDatesRequest,"breakfast");
         CreateBookingService bookingService = new CreateBookingService();
         Response response = bookingService.createBooking(createBookingRequest);
@@ -34,15 +31,12 @@ public class CreateBookingTest extends TestBase{
     @Test(description="Create Booking API using Builder Design Pattern")
     public void createBookingUsingBuilder(){
 
-        System.out.println("Firstname In Builder: " + fname);
-        System.out.println("Lastname  In Builder: " + lname);
-        System.out.println("Price In Builder: " + price);
         CreateBookingRequest createBookingRequest = new CreateBookingRequest.CreateBookingRequestBuilder()
                 .setFirstname(fname)
                 .setLastname(lname)
                 .setTotalPrice(price)
                 .setDepositPaid(true)
-                .setBookingDates("2025-09-01","2025-09-15")
+                .setBookingDates("2026-04-30","2026-05-11")
                 .setAdditionalNeeds("breakfast").build();
 
         CreateBookingService bookingService = new CreateBookingService();

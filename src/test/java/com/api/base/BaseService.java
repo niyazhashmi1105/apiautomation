@@ -12,6 +12,10 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 
 public class BaseService {
@@ -36,6 +40,11 @@ public class BaseService {
 
     protected Response getRequest(String endpoint) {
         return requestSpecification.contentType(ContentType.JSON).get(endpoint);
+    }
+
+    protected Response getRequestWithQueryParams(String endpoint, Map<String, ?> queryParams) {
+
+        return requestSpecification.contentType(ContentType.JSON).queryParams(queryParams).get(endpoint);
     }
 
     protected Response putRequest(Object payload,String endpoint,String token) {
