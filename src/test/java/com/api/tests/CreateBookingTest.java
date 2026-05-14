@@ -19,7 +19,7 @@ public class CreateBookingTest extends TestBase{
     static String lname = getLastName();
     static int price = getPrice();
 
-    @Test(description="Create Booking API", enabled = false)
+    @Test(description="Create Booking API")
     public void createBooking(){
 
         BookingDatesRequest bookingDatesRequest = new BookingDatesRequest("2026-04-30","2026-05-11");
