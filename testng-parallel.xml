@@ -1,33 +1,40 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Booking APIs Parallel Test Suite" parallel="methods" thread-count="5">
+<suite name="Booking APIs Parallel Test Suite">
     <listeners>
-        <listener
-                class-name="com.api.listeners.TestListener"/>
+        <listener class-name="com.api.listeners.TestListener"/>
     </listeners>
-    <test name="Create Booking API">
+
+    <test name="Create Booking API" preserve-order="true">
         <classes>
             <class name="com.api.tests.CreateBookingTest"/>
         </classes>
     </test>
-    <test name="Get Booking API">
+
+    <test name="Get Booking API"
+          parallel="classes"
+          thread-count="2"
+          preserve-order="true">
         <classes>
             <class name="com.api.tests.GetBookingIdTest"/>
             <class name="com.api.tests.GetAllBookingIdsTest"/>
         </classes>
     </test>
-    <test name="Update Booking API">
+
+    <test name="Update Booking API" preserve-order="true">
         <classes>
             <class name="com.api.tests.UpdateBookingTest"/>
         </classes>
     </test>
-    <test name="Partial Update Booking API">
-    <classes>
-        <class name="com.api.tests.PartialUpdateBookingTest"/>
-    </classes>
-</test>
-    <test name="Delete Booking API">
+
+    <test name="Partial Update Booking API" preserve-order="true">
+        <classes>
+            <class name="com.api.tests.PartialUpdateBookingTest"/>
+        </classes>
+    </test>
+
+    <test name="Delete Booking API" preserve-order="true">
         <classes>
             <class name="com.api.tests.DeleteBookingTest"/>
         </classes>
     </test>
+
 </suite>

@@ -26,7 +26,7 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn clean test -Dsuite=testng
+      run: mvn clean test -Dsuite=testng-parallel
 
     - name: Upload Build Artifact
       if: always()

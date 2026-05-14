@@ -3,17 +3,19 @@ package com.api.listeners;
 import com.aventstack.extentreports.Status;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 
-public class TestListener implements ITestListener{
+public class TestListener implements ITestListener, ISuiteListener {
 
     private static final Logger logger = LogManager.getLogger(TestListener.class);
 
-    public void onStart(ITestContext context) {
-        logger.info("Test Suite Started: ");
+    @Override
+    public void onStart(ISuite suite) {
+        logger.info("Suite Started: {}", suite.getName());
         ExtentReportListener.setupSparkReporter("reports/report.html");
+    }
+    public void onStart(ITestContext context) {
+        logger.info("Test Case Started: {} ", context.getName());
     }
 
     public void onTestStart(ITestResult result) {
@@ -35,12 +37,18 @@ public class TestListener implements ITestListener{
     }
 
     public void onFinish(ITestContext context) {
-        logger.info("Test Suite Completed: ");
-        ExtentReportListener.flushReport();
+        logger.info("Test Suite Completed: {} ",context.getName());
     }
 
     public void onTestSkipped(ITestResult result) {
         logger.info("{} skipped", result.getName());
         ExtentReportListener.getTest().log(Status.SKIP, result.getMethod().getMethodName());
+    }
+
+    @Override
+    public void onFinish(ISuite suite) {
+        logger.info("Suite Finished: {}", suite.getName());
+        ExtentReportListener.flushReport();
+        ExtentReportListener.removeTest();
     }
 }

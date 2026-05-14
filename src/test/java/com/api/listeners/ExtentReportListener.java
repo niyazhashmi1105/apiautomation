@@ -6,11 +6,16 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class ExtentReportListener {
 
+    private ExtentReportListener() {}
     private static ExtentReports extentReports;
     private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     public static void setupSparkReporter(String reportName){
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ "//"+reportName);
+        ExtentSparkReporter extentSparkReporter = null;
+        if(extentReports == null){
+            extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir")+ "//"+reportName);
+        }
+
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
     }
@@ -25,6 +30,12 @@ public class ExtentReportListener {
     }
 
     public static void flushReport(){
-        extentReports.flush();
+        if (extentReports != null) {
+            extentReports.flush();
+        }
+    }
+
+    public static void removeTest() {
+        extentTest.remove();
     }
 }
