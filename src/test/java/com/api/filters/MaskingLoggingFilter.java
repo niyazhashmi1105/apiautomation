@@ -23,7 +23,9 @@ public class MaskingLoggingFilter implements Filter {
     private static final ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     @Override
-    public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
+    public Response filter(FilterableRequestSpecification filterableRequestSpecification,
+                           FilterableResponseSpecification filterableResponseSpecification,
+                           FilterContext filterContext) {
 
         logRequest(filterableRequestSpecification);
         Response response = filterContext.next(filterableRequestSpecification, filterableResponseSpecification);
@@ -33,11 +35,6 @@ public class MaskingLoggingFilter implements Filter {
 
     private void logRequest(FilterableRequestSpecification filterableRequestSpecification) {
 
-        logger.info("BASE URI: {}", filterableRequestSpecification.getBaseUri());
-        BaseService.extentLog(Status.INFO,"BASE URI: "+filterableRequestSpecification.getBaseUri());
-        BaseService.extentLog(Status.INFO,"Request Method: "+ filterableRequestSpecification.getMethod());
-
-        // Mask Headers
         Map<String, String> headers = new HashMap<>();
         filterableRequestSpecification.getHeaders().forEach(h -> {
             if (isSensitive(h.getName())) {
@@ -53,8 +50,6 @@ public class MaskingLoggingFilter implements Filter {
         });
         logger.info("Headers: " + headers);
         BaseService.extentLog(Status.INFO,"Request Headers: "+headers);
-
-        // Mask Body
         if (filterableRequestSpecification.getBody() != null) {
             String rawBody = filterableRequestSpecification.getBody();
             String maskedBody = maskBody(rawBody);
@@ -73,7 +68,7 @@ public class MaskingLoggingFilter implements Filter {
         String maskedBody = maskBody(rawBody);
         String prettyBody = prettyPrint(maskedBody);
         logger.info("Response Body:\n" + prettyBody);
-        BaseService.extentLog(Status.INFO, "<pre>" + prettyBody + "</pre>");
+        BaseService.extentLog(Status.INFO, "<pre> " + prettyBody + " </pre>");
     }
 
     private boolean isSensitive(String key) {
