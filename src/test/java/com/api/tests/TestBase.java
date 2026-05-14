@@ -2,6 +2,7 @@ package com.api.tests;
 
 import com.api.base.AuthService;
 import com.api.models.request.AuthRequest;
+import com.api.models.response.AuthResponse;
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeSuite;
@@ -31,7 +32,6 @@ public class TestBase {
             AuthService authService = new AuthService();
             Response authResponse = authService.createToken(new AuthRequest("admin","password123"));
             token = authResponse.jsonPath().getString("token");
-
             if(token == null){
                 System.err.println("Error in generating token");
             }

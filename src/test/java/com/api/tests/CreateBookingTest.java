@@ -31,7 +31,7 @@ public class CreateBookingTest extends TestBase{
 
 
     @Test(description="Create Booking API using Builder Design Pattern")
-    public void createBookingUsingBuilder(){
+    public void createBookingTestUsingBuilderClass(){
 
         CreateBookingRequest createBookingRequest = new CreateBookingRequest.CreateBookingRequestBuilder()
                 .setFirstname(fname)

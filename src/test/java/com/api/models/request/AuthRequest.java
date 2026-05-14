@@ -4,8 +4,8 @@ package com.api.models.request;
 
 public class AuthRequest {
 
-    private String username;
-    private String password;
+    private  String username;
+    private  String password;
 
     public AuthRequest(String username, String password) {
         this.username = username;

@@ -15,6 +15,6 @@ public class GetAllBookingIdsTest {
         Assert.assertEquals(response.getStatusLine(),"HTTP/1.1 200 OK");
         List<Integer> bookingIds = response.jsonPath().getList("bookingid");
         Assert.assertFalse(bookingIds.isEmpty());
-        Assert.assertTrue(bookingIds.size()>0);
+        Assert.assertTrue(!bookingIds.isEmpty());
     }
 }

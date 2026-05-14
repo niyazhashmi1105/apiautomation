@@ -12,8 +12,7 @@ import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.time.LocalDate;
-import java.util.HashMap;
+
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;

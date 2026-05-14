@@ -1,7 +1,6 @@
 package com.api.base;
 
 import io.restassured.response.Response;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +22,9 @@ public class GetBookingService extends BaseService{
         return getRequestWithQueryParams(BASE_PATH+bookingId,queryParams);
     }
 
-    public Response getBookingIdWithCheckinAndCheckoutQueryParams(String checkin, String checkout){
+    public Response getBookingIdWithCheckInAndCheckOutQueryParams(String checkIn, String checkout){
         Map<String, Object> queryParams = new HashMap<>();
-        queryParams.put("checkin", LocalDate.parse(checkin));
+        queryParams.put("checkin", LocalDate.parse(checkIn));
         queryParams.put("checkout", LocalDate.parse(checkout));
         return getRequestWithQueryParams(BASE_PATH+bookingId,queryParams);
     }

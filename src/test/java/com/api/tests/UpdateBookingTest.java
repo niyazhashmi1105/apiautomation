@@ -16,12 +16,12 @@ public class UpdateBookingTest extends TestBase{
 
         UpdateBookingService updateBookingService = new UpdateBookingService();
         CreateBookingRequest updateBookingRequest = new CreateBookingRequest.CreateBookingRequestBuilder()
-                .setFirstname(fname)
-                .setLastname(lname)
-                .setTotalPrice(price)
-                .setDepositPaid(true)
-                .setBookingDates("2026-04-28","2026-04-29")
-                .setAdditionalNeeds("breakfast").build();
+                                                                            .setDepositPaid(true)
+                                                                            .setTotalPrice(price)
+                                                                            .setFirstname(fname)
+                                                                            .setLastname(lname)
+                                                                            .setBookingDates("2026-04-28","2026-04-29")
+                                                                            .setAdditionalNeeds("breakfast").build();
         Response putResponse = updateBookingService.updateBooking(updateBookingRequest,bookingId,token);
         String firstName = putResponse.jsonPath().get("firstname");
         String lastName = putResponse.jsonPath().get("lastname");
